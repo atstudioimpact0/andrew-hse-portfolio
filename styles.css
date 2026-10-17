@@ -142,3 +142,27 @@ dialog::backdrop{background:#041421da;backdrop-filter:blur(5px)}
 @media(max-width:780px){.wrap{width:calc(100% - 38px)}.nav{min-height:70px}.identity strong{font-size:10px}.identity small{font-size:8px}.identity-mark{width:39px;height:39px}.nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:#0a2432;padding:24px;flex-direction:column;gap:23px;align-items:stretch;border-bottom:1px solid #8fa6a84d}.nav-links.open{display:flex}#menu-toggle{display:block}.nav-contact{display:none}.hero-grid{grid-template-columns:1fr;padding-block:68px}.hero-scene{height:390px}.hero h1{font-size:clamp(51px,10vw,82px)}.section-head{display:block}.section-head>p{margin-top:18px}.principles{grid-template-columns:repeat(2,minmax(0,1fr))}.approach-section,.featured-section,.samples-section,.experience-section,.media-section{padding-block:72px}.featured-art{flex-direction:column;gap:35px;min-height:400px}.work-section{padding-block:77px}.work-tools{flex-direction:column;align-items:stretch}.search input{width:100%}.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.media-grid{grid-template-columns:1fr}.sample-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.experience-list{grid-template-columns:1fr}.contact-panel{display:block;padding:30px}.contact-links{margin-top:28px}}
 @media(max-width:540px){.wrap{width:calc(100% - 32px)}.nav-actions{gap:5px}.language{font-size:10px;padding:10px}.hero h1{font-size:51px}.hero-scene{height:315px}.hero-description{font-size:13px}.principles{grid-template-columns:1fr}.principle strong{margin-top:10px}.case-grid,.sample-grid{grid-template-columns:1fr}.case-card{min-height:208px}.media-art{height:180px}.contact-panel h2{font-size:37px}.contact-links a{white-space:normal}#dialog-details{grid-template-columns:1fr;gap:8px}#dialog-details dd{margin-bottom:12px}.dialog-frame{padding:23px}.site-footer .wrap{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* First-party media: appears only when an approved video manifest contains playable files. */
+.video-library-section{padding-block:20px 90px}
+.video-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.video-card{border:1px solid var(--border);background:var(--white);min-width:0}
+.video-card-art{position:relative;aspect-ratio:16/9;background:linear-gradient(125deg,#2c5261,#0d2939);display:grid;place-items:center;overflow:hidden}
+.video-card-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video-art-play{position:relative;border-radius:50%;height:62px;width:62px;font-size:21px;color:#f3c7a4;background:#0c253ab7;border:1px solid #f5f2e9c9}
+.video-art-play:hover{background:var(--accent);color:var(--navy)}
+.video-card-content{padding:23px;display:flex;flex-direction:column;min-height:174px}
+.video-card-content h3{font-size:21px;line-height:1.25;margin:0 0 12px}
+.video-card-content p{font-size:12px;line-height:1.7;color:var(--muted)}
+.video-card-content button{margin-top:auto;align-self:flex-start;padding:11px 14px;background:var(--navy);color:white;border:0;font-size:11px;font-weight:800}
+#video-dialog{width:min(950px,calc(100% - 18px));max-height:90dvh;background:var(--navy);color:white;border-color:#526d78}
+#video-dialog .player-dialog{padding:0;max-height:90dvh;overflow:auto}
+.player-dialog-top{padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.player-dialog-top h2{font-size:21px;margin:0}
+#video-close{font-size:27px;width:38px;height:38px;border:0;background:#315565;color:white}
+#video-player{display:block;width:100%;max-height:67dvh;background:black}
+#video-summary,#video-error{padding:0 22px;color:#d0e0dc;font-size:13px;line-height:1.75}
+#video-error{color:#efab7a}
+[dir=rtl] .player-dialog-top{text-align:right}
+@media(max-width:1040px){.video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:670px){.video-grid{grid-template-columns:1fr}.video-card-content{min-height:0}.player-dialog-top{padding:12px}}
