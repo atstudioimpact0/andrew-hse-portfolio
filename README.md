@@ -12,7 +12,7 @@ Standalone professional portfolio (Arabic / English) for **Andrew Tharwat Boshra
 - All publishing and domain changes must target the **dedicated** Vercel project; never the ATS project.
 
 ## Status
-Initial deployment was shown as READY on the user's Vercel dashboard and custom-domain assignment now reports verified. Public media are still unreviewed/unpublished (videos manifest empty). Site stays `noindex` until release review. Do not generate final CV QR until the custom-domain page and media have been tested.
+Initial deployment was shown as READY on the user's Vercel dashboard and custom-domain assignment now reports verified. Public media binaries are still missing (the video manifest contains two entries, but the MP4/WebP files have not been committed). Site stays `noindex` until release review. Do not generate final CV QR until the custom-domain page and media have been tested.
 
 
 ## V9 — Visual portfolio improvements (2026-10-17)
@@ -28,3 +28,21 @@ The independent `main` branch now includes bilingual progressive visual enhancem
 The approved media package can be uploaded from the separately generated V9 media ZIP (or the guarded Windows PowerShell publishing helper distributed alongside it). Because this repository is public, the helper deliberately requires an explicit rights-clearance confirmation. It never imports or modifies AT Studio live-site files.
 
 The full V9 review package is a separate self-contained ZIP, not currently pushed as the production HTML. The production domain is verified, but live visual/browser verification of recently pushed GitHub changes remains pending due Vercel connector access restrictions.
+
+## Media audit — 2026-10-17
+
+A direct recursive GitHub tree audit of `main` confirmed **zero** binary images and videos in `assets/`. These assets are not yet published:
+- Eight selected bilingual safety-signage WebP images.
+- Four visual campaign/event work samples.
+- One personal portrait.
+- Two video-cover WebP images.
+- Two AI-assisted HSE educational MP4 files.
+
+This is **13 curated pictures + 2 video posters + 2 videos = 17 missing binaries**. The remaining original site-operational plans are explicitly excluded from the public release. The text cards and source-page links remain accessible while binaries are absent.
+
+### Release route
+
+- Windows PowerShell publisher: `tools/Publish-Andrew-Media.ps1` (updated to autodetect an extracted assets directory or selected Media ZIP; supports `-MediaZip`).
+- Repository file verifier: `python tools/audit_media.py`.
+- Publishing requires explicit confirmation of public-display rights for the **specific** images and videos; the public GitHub repository is not the place for source emergency, route, or lifting-plan operational originals.
+- The GitHub/Vercel connection currently supports source updates but not reading/uploading the model's container binary files or reading this new project's Vercel deployments. Do not claim a live media release until those files appear in the Git tree and load over the domain.
