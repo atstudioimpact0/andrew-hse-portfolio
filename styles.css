@@ -166,3 +166,23 @@ dialog::backdrop{background:#041421da;backdrop-filter:blur(5px)}
 [dir=rtl] .player-dialog-top{text-align:right}
 @media(max-width:1040px){.video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:670px){.video-grid{grid-template-columns:1fr}.video-card-content{min-height:0}.player-dialog-top{padding:12px}}
+
+/* V9 progressive enhancements: artwork appears only when its real media file loads. */
+.hero-scene.has-portrait{background:#163746;isolation:isolate}
+.hero-scene.has-portrait .hero-photo{position:absolute;inset:0;height:100%;width:100%;object-fit:cover;object-position:center 28%;z-index:0}
+.hero-scene.has-portrait .hero-svg{opacity:0}
+.hero-scene.has-portrait:after{z-index:0;background:linear-gradient(transparent 48%,#061927d9)}
+.hero-scene.has-portrait .scene-top,.hero-scene.has-portrait .scene-bottom{z-index:2}
+.sample.has-image{padding:0;overflow:hidden}
+.real-sample-open{display:block;overflow:hidden;width:100%;aspect-ratio:1.5;border:0;background:#f1f1ed;padding:0;cursor:zoom-in}
+.real-sample-image{display:block;object-fit:contain;width:100%;height:100%;background:#f7f7f3}
+.sample.has-image h3{margin:16px 18px 8px}
+.sample.has-image .sample-mark{padding:15px 18px 0}
+.sample.has-image small{display:none}
+#sample-picture-dialog{background:#092535;color:#f7f5ef;border:1px solid #567787;max-width:min(1100px,calc(100vw - 26px));width:100%;max-height:95vh;padding:0}
+#sample-picture-dialog::backdrop{background:#031722d9}
+#sample-picture-dialog .picture-top{padding:16px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+#sample-picture-dialog .picture-top strong{font-size:15px}
+#picture-close{background:#345767;border:0;color:white;font-size:24px;min-width:42px;height:42px}
+#picture-image{display:block;max-height:75vh;object-fit:contain;width:100%;background:#f6f6f3}
+@media(max-width:780px){.sample.has-image h3{font-size:15px}.hero-scene.has-portrait .hero-photo{object-position:center 24%}}
