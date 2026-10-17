@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "three_entries_registered_binary_upload_pending",
+  "status": "four_entries_registered_binary_upload_pending",
   "distribution": "public-review-after-clearance",
   "videos": [
     {
@@ -43,7 +43,24 @@
       "file_ready": false,
       "source_filename": "lv_0_٢٠٢٦١٠١٥١٥٥٩٢٥.mp4",
       "original_size_bytes": 51491578
+    },
+    {
+      "id": "andrew-hse-new-video-20261015-162345",
+      "type": "unclassified",
+      "src": "assets/videos/andrew-hse-new-video-20261015-162345.mp4",
+      "title_en": "Selected portfolio video 04 — content review pending",
+      "title_ar": "فيديو من الأعمال المختارة ٠٤ — بانتظار مراجعة المحتوى",
+      "category_en": "Visual portfolio — pending classification",
+      "category_ar": "الأعمال المرئية — التصنيف بانتظار المراجعة",
+      "description_en": "New video selected by Andrew for the personal portfolio. The footage and duration have not yet been independently reviewed.",
+      "description_ar": "فيديو جديد اختاره أندرو لملف أعماله الشخصي. لم يتم فحص المشاهد أو التحقق من المدة بعد.",
+      "owner_approved": true,
+      "file_ready": false,
+      "media_inspected": false,
+      "public_release_verified": false,
+      "source_filename": "lv_0_٢٠٢٦١٠١٥١٦٢٣٤٥.mp4",
+      "original_size_bytes": 75134253
     }
   ],
-  "notes": "Three video entries are recorded. Browser HEAD checks hide clips until files are actually hosted. New video content/duration/thumbnail were not verified; the source file is 51,491,578 bytes."
+  "notes": "Four entries recorded. Owner approval to include item 4 does not verify the footage, duration or public distribution rights. Browser playback cards stay hidden until actual MP4 exists. Original media files not uploaded to GitHub."
 }
