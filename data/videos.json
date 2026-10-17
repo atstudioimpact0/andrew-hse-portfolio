@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "metadata_ready_files_not_uploaded",
+  "status": "three_entries_registered_binary_upload_pending",
   "distribution": "public-review-after-clearance",
   "videos": [
     {
@@ -28,7 +28,22 @@
       "category_ar": "تدريب بصري على السلامة",
       "description_en": "AI-assisted illustrated safety briefing scenario; not independently verified as real site footage.",
       "description_ar": "مشهد توضيحي لإحاطة سلامة الفريق بمساعدة الذكاء الاصطناعي، وليس توثيقًا ميدانيًا معتمدًا."
+    },
+    {
+      "id": "andrew-hse-new-video-20261015",
+      "type": "awareness",
+      "src": "assets/videos/andrew-hse-new-video-20261015.mp4",
+      "title_en": "Selected HSE visual work — October 2026",
+      "title_ar": "عمل مرئي مختار للسلامة — أكتوبر ٢٠٢٦",
+      "category_en": "HSE visual portfolio",
+      "category_ar": "أعمال مرئية في السلامة",
+      "description_en": "An additional selected video from Andrew Tharwat's visual work archive.",
+      "description_ar": "فيديو إضافي مختار من مكتبة أعمال أندرو ثروت المرئية.",
+      "owner_approved": true,
+      "file_ready": false,
+      "source_filename": "lv_0_٢٠٢٦١٠١٥١٥٥٩٢٥.mp4",
+      "original_size_bytes": 51491578
     }
   ],
-  "notes": "video.js performs HEAD checks on each MP4. Cards are not shown until the actual files are present at the listed paths."
+  "notes": "Three video entries are recorded. Browser HEAD checks hide clips until files are actually hosted. New video content/duration/thumbnail were not verified; the source file is 51,491,578 bytes."
 }
