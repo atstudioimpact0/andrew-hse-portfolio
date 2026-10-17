@@ -118,9 +118,9 @@ try {
   # Keep the bilingual video manifest that is already reviewed in GitHub.
   # Verify the two video file paths exactly match that manifest.
   $manifest=(Get-Content -LiteralPath (Join-Path $checkout 'data/videos.json') -Raw | ConvertFrom-Json)
-  $approvedPaths=@('assets/videos/hse-decision-training.mp4','assets/videos/site-safety-briefing.mp4','assets/videos/andrew-hse-new-video-20261015.mp4','assets/videos/andrew-hse-new-video-20261015-162345.mp4')
-  if (@($manifest.videos).Count -lt 2 -or @($manifest.videos).Count -gt 4) {
-    throw 'GitHub video manifest must contain two to four recognized video entries.'
+  $approvedPaths=@('assets/videos/hse-decision-training.mp4','assets/videos/site-safety-briefing.mp4','assets/videos/andrew-hse-new-video-20261015.mp4','assets/videos/andrew-hse-new-video-20261015-162345.mp4','assets/videos/andrew-hse-new-video-20260929-171128.mp4')
+  if (@($manifest.videos).Count -lt 2 -or @($manifest.videos).Count -gt 5) {
+    throw 'GitHub video manifest must contain two to five recognized video entries.'
   }
   foreach($item in $manifest.videos) {
     if ($item.src -notin $approvedPaths) {
@@ -131,7 +131,8 @@ try {
   # Source video files may be >50 MB; optimize them first for a usable public mobile portfolio.
   $extraVideos=@(
     'assets/videos/andrew-hse-new-video-20261015.mp4',
-    'assets/videos/andrew-hse-new-video-20261015-162345.mp4'
+    'assets/videos/andrew-hse-new-video-20261015-162345.mp4',
+    'assets/videos/andrew-hse-new-video-20260929-171128.mp4'
   )
   foreach($optional in $extraVideos) {
     $file=Join-Path $source $optional
