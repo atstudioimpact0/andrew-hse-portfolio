@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "four_entries_registered_binary_upload_pending",
+  "status": "five_entries_registered_binary_upload_pending",
   "distribution": "public-review-after-clearance",
   "videos": [
     {
@@ -60,7 +60,24 @@
       "public_release_verified": false,
       "source_filename": "lv_0_٢٠٢٦١٠١٥١٦٢٣٤٥.mp4",
       "original_size_bytes": 75134253
+    },
+    {
+      "id": "andrew-hse-new-video-20260929-171128",
+      "type": "unclassified",
+      "src": "assets/videos/andrew-hse-new-video-20260929-171128.mp4",
+      "title_en": "Selected portfolio video 05 — content review pending",
+      "title_ar": "فيديو من الأعمال المختارة ٠٥ — بانتظار مراجعة المحتوى",
+      "category_en": "Visual portfolio — pending classification",
+      "category_ar": "الأعمال المرئية — التصنيف بانتظار المراجعة",
+      "description_en": "Fifth video selected by Andrew for his professional HSE portfolio. Footage, duration, and technical properties have not yet been inspected.",
+      "description_ar": "الفيديو الخامس الذي اختاره أندرو لملف أعماله المهني في السلامة. لم يتم فحص المشاهد أو المدة أو المواصفات الفنية بعد.",
+      "owner_approved": true,
+      "file_ready": false,
+      "media_inspected": false,
+      "public_release_verified": false,
+      "source_filename": "lv_0_٢٠٢٦٠٩٢٩١٧١١٢٨.mp4",
+      "original_size_bytes": 45658394
     }
   ],
-  "notes": "Four entries recorded. Owner approval to include item 4 does not verify the footage, duration or public distribution rights. Browser playback cards stay hidden until actual MP4 exists. Original media files not uploaded to GitHub."
+  "notes": "Five owner-selected videos recorded. New videos 3-5 are not yet transcoded or independently media-inspected, and MP4 binaries are absent. The owner selected these for inclusion, not certification of footage provenance or third-party public release clearance."
 }
