@@ -118,11 +118,33 @@ try {
   # Keep the bilingual video manifest that is already reviewed in GitHub.
   # Verify the two video file paths exactly match that manifest.
   $manifest=(Get-Content -LiteralPath (Join-Path $checkout 'data/videos.json') -Raw | ConvertFrom-Json)
-  if (@($manifest.videos).Count -ne 2) { throw 'GitHub media manifest must contain exactly two approved video entries.' }
+  $approvedPaths=@('assets/videos/hse-decision-training.mp4','assets/videos/site-safety-briefing.mp4','assets/videos/andrew-hse-new-video-20261015.mp4')
+  if (@($manifest.videos).Count -lt 2 -or @($manifest.videos).Count -gt 3) {
+    throw 'GitHub video manifest must contain two or three recognized video entries.'
+  }
   foreach($item in $manifest.videos) {
-    if ($item.src -notin @('assets/videos/hse-decision-training.mp4','assets/videos/site-safety-briefing.mp4')) {
-      throw "Video manifest references a different file: $($item.src)"
+    if ($item.src -notin $approvedPaths) {
+      throw "Video manifest references an unexpected file: $($item.src)"
     }
+  }
+  # New owner-approved third video is optional and never blocks publishing the two previous files.
+  # If present, it must be public-cleared and stored under its expected safe path.
+  $third='assets/videos/andrew-hse-new-video-20261015.mp4'
+  $thirdFile=Join-Path $source $third
+  if (Test-Path -LiteralPath $thirdFile -PathType Leaf) {
+    $head=[byte[]]::new(12)
+    $readStream=[IO.File]::OpenRead($thirdFile)
+    try { [void]$readStream.Read($head,0,12) } finally { $readStream.Dispose() }
+    if ([Text.Encoding]::ASCII.GetString($head,4,4) -ne 'ftyp') {
+      throw 'Third HSE video was present, but it has an invalid MP4 header.'
+    }
+    if ((Get-Item -LiteralPath $thirdFile).Length -gt 80000000) {
+      throw 'Third video exceeds safety limit. Compress the clip before upload.'
+    }
+    $thirdTarget=Join-Path $checkout $third
+    New-Item -ItemType Directory -Path (Split-Path -Parent $thirdTarget) -Force | Out-Null
+    Copy-Item -LiteralPath $thirdFile -Destination $thirdTarget -Force
+    Write-Host 'Third owner-approved HSE video prepared for upload.' -ForegroundColor Cyan
   }
   Push-Location $checkout
   try {
