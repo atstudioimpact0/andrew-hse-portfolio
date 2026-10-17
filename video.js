@@ -24,9 +24,13 @@ function show(item,from){lastTrigger=from;heading.textContent=item["title_"+(ar?
 player.src=item.src;if(isSafe(item.poster,safePoster))player.poster=item.poster;modal.showModal();
 const play=player.play();if(play&&play.catch)play.catch(()=>{});
 }
-fetch("data/videos.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("Missing media manifest");return r.json()}).then(data=>{
-const records=(Array.isArray(data.videos)?data.videos:[]).filter(v=>v&&isSafe(v.src,safeVideo));
-if(!records.length)return;
+fetch("data/videos.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("Missing media manifest");return r.json()}).then(async data=>{
+const planned=(Array.isArray(data.videos)?data.videos:[]).filter(v=>v&&isSafe(v.src,safeVideo));
+const verified=await Promise.all(planned.map(async v=>{
+ try{const response=await fetch(v.src,{method:"HEAD",cache:"no-store"});return response.ok?v:null}catch{return null}
+}));
+const records=verified.filter(Boolean);
+if(!records.length){root.hidden=true;return}
 root.hidden=false;
 records.forEach(v=>{
 const card=document.createElement("article");card.className="video-card";
