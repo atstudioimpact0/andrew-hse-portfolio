@@ -1,6 +1,34 @@
 {
   "schemaVersion": 1,
-  "status": "pending_asset_verification",
-  "videos": [],
-  "note": "Source MP4s are not yet present in this public repository. Do not claim playback until files and permission checks succeed."
+  "status": "metadata_ready_files_not_uploaded",
+  "distribution": "public-review-after-clearance",
+  "videos": [
+    {
+      "id": "hse-decision-training",
+      "type": "training",
+      "duration_seconds": 74.449,
+      "src": "assets/videos/hse-decision-training.mp4",
+      "poster": "assets/video-posters/hse-decision-training.webp",
+      "title_en": "HSE training visual — practical safety decisions",
+      "title_ar": "عرض تعليمي للسلامة — اتخاذ القرارات العملية",
+      "category_en": "HSE visual training",
+      "category_ar": "تدريب بصري على السلامة",
+      "description_en": "AI-assisted illustrated learning scenarios; not independently authenticated documentary site footage.",
+      "description_ar": "مشاهد تعليمية توضيحية بمساعدة الذكاء الاصطناعي، وليست توثيقًا ميدانيًا أصليًا معتمدًا."
+    },
+    {
+      "id": "site-safety-briefing",
+      "type": "training",
+      "duration_seconds": 77.376,
+      "src": "assets/videos/site-safety-briefing.mp4",
+      "poster": "assets/video-posters/site-safety-briefing.webp",
+      "title_en": "Site safety briefing — illustrated learning sequence",
+      "title_ar": "إحاطة السلامة بالموقع — مشاهد توضيحية",
+      "category_en": "HSE visual training",
+      "category_ar": "تدريب بصري على السلامة",
+      "description_en": "AI-assisted illustrated safety briefing scenario; not independently verified as real site footage.",
+      "description_ar": "مشهد توضيحي لإحاطة سلامة الفريق بمساعدة الذكاء الاصطناعي، وليس توثيقًا ميدانيًا معتمدًا."
+    }
+  ],
+  "notes": "video.js performs HEAD checks on each MP4. Cards are not shown until the actual files are present at the listed paths."
 }
