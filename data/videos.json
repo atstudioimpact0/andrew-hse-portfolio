@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "five_entries_registered_binary_upload_pending",
+  "status": "six_entries_registered_binary_upload_pending",
   "distribution": "public-review-after-clearance",
   "videos": [
     {
@@ -77,7 +77,25 @@
       "public_release_verified": false,
       "source_filename": "lv_0_٢٠٢٦٠٩٢٩١٧١١٢٨.mp4",
       "original_size_bytes": 45658394
+    },
+    {
+      "id": "andrew-hse-selected-video-20260920-131821601",
+      "type": "unclassified",
+      "src": "assets/videos/andrew-hse-selected-video-20260920-131821601.mp4",
+      "title_en": "Selected portfolio video 06 — content verification pending",
+      "title_ar": "فيديو من الأعمال المختارة ٠٦ — بانتظار فحص المحتوى",
+      "category_en": "Portfolio video — classification pending",
+      "category_ar": "فيديو بورتفوليو — بانتظار التصنيف",
+      "description_en": "New video submitted for publication by Andrew. Video content and duration could not yet be inspected, and the optimized MP4 is not hosted.",
+      "description_ar": "فيديو جديد اعتمده أندرو للنشر. تعذّر فحص محتواه ومدته حتى الآن، ولم تُرفع نسخته المحسّنة للاستضافة.",
+      "owner_approved": true,
+      "publication_requested": true,
+      "media_inspected": false,
+      "file_ready": false,
+      "playback_tested": false,
+      "source_filename": "2026-09-20-131821601.mp4",
+      "original_size_bytes": 69870115
     }
   ],
-  "notes": "Five owner-selected videos recorded. New videos 3-5 are not yet transcoded or independently media-inspected, and MP4 binaries are absent. The owner selected these for inclusion, not certification of footage provenance or third-party public release clearance."
+  "notes": "Six videos registered. The sixth video has explicit user publication intent; this does not confirm the video was inspected, compressed, uploaded, tested, or that third-party release requirements were satisfied. The video.js player hides missing MP4 files."
 }
