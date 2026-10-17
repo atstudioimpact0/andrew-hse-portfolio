@@ -15,8 +15,10 @@ const safeSamples={
 };
 function decorateGallery(){
  const list=document.querySelectorAll("#samples-grid .sample");
- list.forEach((card,i)=>{
-  const src=safeSamples[i];if(!src||card.querySelector(".real-sample-image"))return;
+ list.forEach((card)=>{
+  const label=card.querySelector("h3")?.textContent?.trim()||"";
+  const originalIndex=(window.PORTFOLIO_DATA?.samples||[]).findIndex(item=>item[0]===label||item[1]===label);
+  const src=safeSamples[originalIndex];if(!src||card.querySelector(".real-sample-image"))return;
   const img=document.createElement("img");img.src=src;img.loading="lazy";img.decoding="async";
   img.className="real-sample-image";img.alt=card.querySelector("h3")?.textContent||"HSE visual work";
   img.addEventListener("load",()=>{
