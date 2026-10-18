@@ -193,7 +193,7 @@ html[lang=ar] .library-intro h2{letter-spacing:0;line-height:1.5}
 @media(max-width:390px){
  .wrap,.library-inner{width:calc(100% - 32px)}
  .nav-shell{gap:9px}
- .site-nav a{font-size:11px}
+ .site-nav a{font-size:12px}
  .identity-name{font-size:16px}
  .identity-spec{font-size:10px}
  .hero-message h1{font-size:42px}
