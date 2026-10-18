@@ -128,7 +128,7 @@ try {
  if($confirmation -cne 'PUBLISH'){Write-Host 'Cancelled';exit 0}
  Push-Location $checkout
  try{
-  & git add -- assets/signage assets/work assets/videos assets/video-posters
+  & git add -- assets
   if($LASTEXITCODE -ne 0){throw 'Git add failed'}
   & git diff --cached --quiet
   if($LASTEXITCODE -eq 0){Write-Host 'Already uploaded: nothing to change.' -ForegroundColor Green;exit 0}
