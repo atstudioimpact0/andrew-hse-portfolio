@@ -20,6 +20,24 @@ for(const p of [...requiredSigns,portrait,...videoPaths]){
 const all=[...requiredSigns,portrait,...videoPaths];
 const actual=all.filter(p=>fs.existsSync(path.join(cwd,p)));
 const missing=all.filter(p=>!fs.existsSync(path.join(cwd,p)));
+const conceptualLayoutPreviews=[
+ "assets/layout-previews/traffic-layout.svg",
+ "assets/layout-previews/evacuation-layout.svg",
+ "assets/layout-previews/medical-route.svg",
+ "assets/layout-previews/lifting-sketch.svg"
+];
+for(const rel of conceptualLayoutPreviews){
+ const full=path.join(cwd,rel);
+ if(!fs.existsSync(full))throw Error("Missing safe conceptual layout preview: "+rel);
+ const svg=fs.readFileSync(full,"utf8");
+ if(!svg.includes("<svg")||!svg.includes("NOT A SITE DRAWING")){
+   throw Error("Concept-only preview missing disclosure: "+rel);
+ }
+}
+const layoutScript=fs.readFileSync(path.join(cwd,"v11.js"),"utf8");
+for(const slug of ["traffic-layout","evacuation-layout","medical-route","lifting-sketch"]){
+ if(!layoutScript.includes(slug))throw Error("Missing gallery map for "+slug);
+}
 const htmls=["index.html","ar.html"];
 for(const p of htmls){
  const page=fs.readFileSync(path.join(cwd,p),"utf8");
@@ -35,6 +53,7 @@ const result={
  videoCount:videoPaths.length,videoReady:videoPaths.filter(p=>actual.includes(p)).length,
  filesMissing:missing
 };
+result.conceptualLayoutPreviews=conceptualLayoutPreviews.length;
 console.log(JSON.stringify(result,null,2));
 if(missing.length)console.warn("Media not fully uploaded; missing media is intentionally hidden on the public site.");
 if(process.argv.includes("--strict")&&missing.length)process.exitCode=2;

@@ -43,13 +43,22 @@ function makeThumb(symbol,alt){
  placeholder.setAttribute("aria-hidden","true");wrap.append(placeholder);
  wrap.setAttribute("aria-label",alt||"");return wrap;
 }
-function detailOpen(title,desc,boundary,trigger,source){
+function detailOpen(title,desc,boundary,trigger,source,examples){
  lastDetail=trigger;
- $$("detail-title").textContent=title;$$("detail-description").textContent=desc||"";$$("detail-boundary").textContent=boundary||"";
- let img=$$("detail-image");if(img)img.remove();
+ $("detail-title").textContent=title;$("detail-description").textContent=desc||"";$("detail-boundary").textContent=boundary||"";
+ const oldImg=$("detail-image");if(oldImg)oldImg.remove();
+ const oldList=$("detail-examples");if(oldList)oldList.remove();
  if(source&&safeImage.test(source)){
-   img=element("img","detail-image");img.id="detail-image";img.src=source;img.alt=title;
-   $$("detail-description").before(img);
+   const img=element("img","detail-image");img.id="detail-image";img.src=source;img.alt=title;
+   $("detail-description").before(img);
+ }
+ if(Array.isArray(examples)&&examples.length){
+   const container=element("section","detail-examples");container.id="detail-examples";
+   container.append(element("h3","",ar?"نماذج الأعمال المرتبطة":"Related work examples"));
+   const u=element("ul");
+   examples.forEach(item=>u.append(element("li","",item)));
+   container.append(u);
+   $("detail-boundary").before(container);
  }
  detail.showModal();
 }
@@ -88,15 +97,44 @@ async function showSigns(){
  note.textContent=names.signs.note;
 }
 function showLayouts(){
- layouts.forEach((i,pos)=>{
-   const c=cases[i];if(!c)return;
-   const title=pick(c);const desc=ar?c[5]:c[4],scope=ar?c[7]:c[6];
+ const projects=[
+  {i:7,slug:"traffic-layout",samples:[8,13,14,15]},
+  {i:8,slug:"evacuation-layout",samples:[9,10,11,12]},
+  {i:9,slug:"medical-route",samples:[16,17]},
+  {i:10,slug:"lifting-sketch",samples:[18,19,20]}
+ ];
+ projects.forEach((entry)=>{
+   const c=cases[entry.i];if(!c)return;
+   const title=pick(c),desc=ar?c[5]:c[4],scope=ar?c[7]:c[6];
+   const examples=entry.samples.map(i=>samples[i]).filter(Boolean).map(x=>pick(x));
    const article=cardShell("layout-tile",title,desc);
-   const thumb=makeThumb(String(pos+1).padStart(2,"0"),title);
-   article.prepend(thumb);
+   const thumb=makeThumb("",title);
+   const fallback=document.createElement("img");
+   fallback.alt=ar?"رسم توضيحي عام، ليس مخطط الموقع الأصلي":"Conceptual illustration, not the original site drawing";
+   fallback.loading="lazy";fallback.decoding="async";
+   fallback.src="assets/layout-previews/"+entry.slug+".svg";
+   thumb.replaceChildren(fallback);
+   let publishedSource=null;
+   const caption=element("p","layout-caption",ar?"تصور توضيحي — مش المخطط الأصلي":"Conceptual illustration — not an original plan");
+   const listCount=element("p","layout-example-count",ar?examples.length+" نماذج مرتبطة بنفس المجال":examples.length+" related work examples");
+   // Optional OWNER-SANITIZED WebP replaces the schematic only when it actually loads.
+   const preview="assets/layout-previews/"+entry.slug+".webp";
+   if(safeImage.test(preview)){
+     const img=new Image();img.alt=title;img.decoding="async";
+     img.onload=()=>{
+       if(img.naturalWidth>0){
+         publishedSource=preview;
+         thumb.replaceChildren(img);
+         caption.textContent=ar?"نسخة عرض مختارة":"Portfolio preview";
+       }
+     };
+     img.src=preview;
+   }
    const btn=element("button","open-action",terms.read+" ↗");btn.type="button";
-   btn.addEventListener("click",()=>detailOpen(title,desc,scope,btn));
-   article.append(btn);grid.append(article);
+   btn.addEventListener("click",()=>detailOpen(title,desc,scope,btn,publishedSource,examples));
+   article.prepend(thumb);
+   article.append(caption,listCount,btn);
+   grid.append(article);
  });
  note.textContent=names.layouts.note;
 }
