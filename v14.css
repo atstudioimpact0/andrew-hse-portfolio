@@ -204,3 +204,10 @@ html[lang=ar] .library-intro h2{letter-spacing:0;line-height:1.5}
  html{scroll-behavior:auto}
  *,:before,:after{transition:none!important;animation:none!important}
 }
+
+/* One restrained entrance to Andrew's independent selected work. */
+.second-volume-link{display:inline-flex;align-items:center;gap:13px;width:max-content;max-width:100%;margin-top:26px;padding:9px 0;border-bottom:1px solid #ab795a;font-size:14px;font-weight:700;color:#304337}
+.second-volume-link small{font-size:10px;letter-spacing:.12em;color:#a87556}
+.second-volume-link span:last-child{color:#ae785a;font-size:20px}
+.second-volume-link:hover{color:#a87556}
+@media(max-width:720px){.second-volume-link{margin-top:19px}}
