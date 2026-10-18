@@ -169,7 +169,7 @@ function closeLibrary(){
 exit?.addEventListener("click",closeLibrary);
 back?.addEventListener("click",closeLibrary);
 lib?.addEventListener("click",e=>{if(e.target===lib)closeLibrary()});
-lib?.addEventListener("close",()=>{const target=returnFocus;current=null;if(target?.isConnected)target.focus()});
+lib?.addEventListener("close",()=>{const previous=current;const target=returnFocus;current=null;if(previous&&location.hash==="#"+previous)history.replaceState(null,"",location.pathname+location.search+"#work");if(target?.isConnected)target.focus()});
 document.querySelectorAll("[data-open]").forEach(button=>button.addEventListener("click",()=>{
  const type=button.getAttribute("data-open");
  history.pushState(null,"",location.pathname+location.search+"#"+type);
