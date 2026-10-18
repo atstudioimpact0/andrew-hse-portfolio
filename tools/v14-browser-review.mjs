@@ -22,6 +22,20 @@ try{
   assert.equal(response?.status(),200,c.name+" HTML load");
   await page.waitForFunction(()=>document.querySelectorAll(".work-line").length===16,{timeout:10000});
   assert.equal(await page.locator(".door").count(),3,c.name+" doorway count");
+  assert.equal(await page.locator(".timeline-item").count(),2,c.name+" two grounded CV positions");
+  assert.equal(await page.locator(".education").count(),1,c.name+" education entry");
+  assert.equal(await page.locator(".hero-role").count(),1,c.name+" clear job title");
+  const readability=await page.evaluate(()=>{
+    const selectors=[".hero-description",".timeline-item time",".project",".door-desc",".work-line-label",".site-nav a"];
+    return selectors.map(selector=>{
+      const el=document.querySelector(selector);
+      return {selector,size:el?parseFloat(getComputedStyle(el).fontSize):0};
+    });
+  });
+  for(const item of readability){
+    assert.ok(item.size>=12,c.name+" text too small "+item.selector+"="+item.size);
+  }
+
   assert.equal(await page.locator(".work-line").count(),16,c.name+" 16 work areas");
   assert.equal(await page.locator(".work-examples li").count(),25,c.name+" 25 unique example labels");
   assert.equal(await page.locator(".hero-photo img").evaluate(img=>img.naturalWidth>0),true,c.name+" portrait loaded");
