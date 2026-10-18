@@ -1,0 +1,21 @@
+name: V14 Independent Preview QA
+on:
+  push:
+    branches: ["preview/andrew-v14-editorial-technical"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check scripts
+        run: |
+          node --check v11.js
+          node --check v12-work.js
+          node --check tools/check-v14-preview.mjs
+      - name: Assert design completeness, work and media preservation
+        run: node tools/check-v14-preview.mjs
