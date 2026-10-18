@@ -30,4 +30,24 @@ jobs:
           }
           $astText = Get-Content -LiteralPath $file -Raw
           if ($astText -notmatch 'Select-LocalFiles' -or $astText -notmatch 'PUBLISH' -or $astText -notmatch 'git push origin main') { exit 1 }
+          if ($astText -match "Read-Host 'Git commit name" -or $astText -match "Read-Host 'Git commit email") { throw 'Media publisher still has interactive Git author prompts.' }
+          if ($astText -notmatch 'git config --local user.name' -or $astText -notmatch 'git config --local user.email') { throw 'Expected temporary checkout Git identity.' }
           Write-Host 'PASS: Windows PowerShell 5.1 parsed the complete media publisher without errors.'
+      - name: Smoke test local Git identity and commit with no global Git author
+        shell: powershell
+        run: |
+          $working = Join-Path $env:RUNNER_TEMP 'andrew-author-smoke'
+          New-Item -ItemType Directory -Path $working -Force | Out-Null
+          Push-Location $working
+          try {
+            git init -q
+            git config --local user.name 'Andrew Tharwat'
+            git config --local user.email '336125721+atstudioimpact0@users.noreply.github.com'
+            Set-Content -LiteralPath 'example.txt' -Value 'media commit smoke test'
+            git add -- example.txt
+            git commit -q -m 'test: approved media commit identity'
+            if ($LASTEXITCODE -ne 0) { throw 'Local test commit failed.' }
+            $author = git log -1 --format='%an <%ae>'
+            if ($author -ne 'Andrew Tharwat <336125721+atstudioimpact0@users.noreply.github.com>') { throw ('Incorrect commit author: ' + $author) }
+            Write-Host ('PASS: media uploader local Git identity committed successfully: ' + $author)
+          } finally { Pop-Location }
