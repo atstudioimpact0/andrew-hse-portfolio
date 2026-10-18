@@ -202,12 +202,12 @@ function openLibrary(type,from){
 function closeLibrary(){
  if(lib?.open){if(detail?.open)detail.close();if(playerDlg?.open)playerDlg.close();lib.close()}
  current=null;
- if(["#videos","#signs","#layouts"].includes(location.hash))history.replaceState(null,"",location.pathname+location.search+"#work");
+ if(["#videos","#signs","#layouts"].includes(location.hash))history.replaceState(null,"",location.pathname+location.search+"#collections");
 }
 exit?.addEventListener("click",closeLibrary);
 back?.addEventListener("click",closeLibrary);
 lib?.addEventListener("click",e=>{if(e.target===lib)closeLibrary()});
-lib?.addEventListener("close",()=>{const previous=current;const target=returnFocus;current=null;if(previous&&location.hash==="#"+previous)history.replaceState(null,"",location.pathname+location.search+"#work");if(target?.isConnected)target.focus()});
+lib?.addEventListener("close",()=>{const previous=current;const target=returnFocus;current=null;if(previous&&location.hash==="#"+previous)history.replaceState(null,"",location.pathname+location.search+"#collections");if(target?.isConnected)target.focus()});
 document.querySelectorAll("[data-open]").forEach(button=>button.addEventListener("click",()=>{
  const type=button.getAttribute("data-open");
  history.pushState(null,"",location.pathname+location.search+"#"+type);
