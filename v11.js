@@ -6,9 +6,9 @@ const lib=$$("library-dialog"),back=$$("library-back"),exit=$$("library-close"),
 const detail=$$("detail-dialog"),dclose=$$("detail-close"), playerDlg=$$("player-dialog"),pclose=$$("player-close");
 const player=$$("player-video"),pError=$$("player-error");
 const names={
- videos:ar?{name:"الفيديوهات",intro:"أعمال مرئية وتوعوية مختارة. كل فيديو بيظهر هنا فقط بعد وجود ملف تشغيل فعلي.",note:"المقاطع التوضيحية أو المصنوعة بمساعدة AI لا تُقدَّم باعتبارها تصويرًا ميدانيًا أصليًا."}:{name:"Films & video",intro:"Selected films and safety learning materials. A film appears only after its actual playable file has been uploaded.",note:"Illustrative or AI-assisted footage is not presented as independently verified documentary site footage."},
- signs:ar?{name:"لافتات السلامة",intro:"تصميمات توعوية ولافتات عربي وإنجليزي، مجمعة في مكان واحد بعيدًا عن الصفحة الرئيسية.",note:"الأعمال المختارة للتقديم الشخصي؛ استخدام العلامات التجارية أو صور المشروع يخضع لتصريح النشر."}:{name:"Safety signs",intro:"Selected bilingual safety graphics, posters and awareness designs, all kept in one quiet gallery.",note:"Project marks or identifiable site imagery require publication permission."},
- layouts:ar?{name:"المخططات والرسومات",intro:"مساهمات في رسم وتحديث مخططات ميدانية وتصورات فنية، مع الفصل بين التصميم والتصديق الهندسي.",note:"المسارات التشغيلية ومعلومات الطوارئ التفصيلية مش معروضة بشكل عام. المعروض هنا وصف آمن لنطاق العمل."}:{name:"Layouts & drawings",intro:"Planning diagrams and technical visuals I contributed to, with design support kept distinct from engineering approval.",note:"Operational routes, emergency details and original engineering plans are not publicly published. The gallery includes safe descriptions only."}
+ videos:ar?{name:"الفيديوهات",intro:"فيديوهات تدريب وتوعية.",note:"المشاهد التوضيحية بمساعدة AI ليست تصويرًا ميدانيًا موثقًا."}:{name:"Videos",intro:"Safety training and awareness videos.",note:"AI-assisted visuals are illustrative, not verified site footage."},
+ signs:ar?{name:"لافتات السلامة",intro:"لافتات ومواد توعية بالعربي والإنجليزي.",note:"تُعرض الأعمال المسموح بنشرها فقط."}:{name:"Safety Signage",intro:"Bilingual signs and safety graphics.",note:"Only authorized work is shown."},
+ layouts:ar?{name:"المخططات والرسومات",intro:"رسومات فنية وتوضيحية مختارة.",note:"الرسومات المعروضة توضيحية، وليست المخططات التشغيلية الأصلية."}:{name:"Technical Layouts",intro:"Selected technical and visual drawings.",note:"Conceptual examples only. Original operational layouts are private."}
 };
 const terms=ar?{available:"شاهد العمل",notYet:"الملفات لسه مش مرفوعة",loading:"جاري التحقق من الملفات",empty:"المختارات المعتمدة هتظهر هنا بعد رفع الملفات واختبار عرضها.",read:"تفاصيل العمل",close:"إغلاق",watch:"شاهد الفيديو",error:"تعذّر تشغيل الفيديو",role:"نطاق المسؤولية"}:{available:"View work",notYet:"Files not uploaded yet",loading:"Checking media",empty:"Selected media will appear here after the files are uploaded and verified.",read:"Read about this work",close:"Close",watch:"Watch film",error:"Video could not be played",role:"Scope of responsibility"};
 let current=null,returnFocus=null,lastDetail=null,lastPlayer=null;
@@ -45,12 +45,12 @@ function makeThumb(symbol,alt){
 }
 function detailOpen(title,desc,boundary,trigger,source,examples){
  lastDetail=trigger;
- $("detail-title").textContent=title;$("detail-description").textContent=desc||"";$("detail-boundary").textContent=boundary||"";
- const oldImg=$("detail-image");if(oldImg)oldImg.remove();
- const oldList=$("detail-examples");if(oldList)oldList.remove();
+ $$("detail-title").textContent=title;$$("detail-description").textContent=desc||"";$$("detail-boundary").textContent=boundary||"";
+ const oldImg=$$("detail-image");if(oldImg)oldImg.remove();
+ const oldList=$$("detail-examples");if(oldList)oldList.remove();
  if(source&&safeImage.test(source)){
    const img=element("img","detail-image");img.id="detail-image";img.src=source;img.alt=title;
-   $("detail-description").before(img);
+   $$("detail-description").before(img);
  }
  if(Array.isArray(examples)&&examples.length){
    const container=element("section","detail-examples");container.id="detail-examples";
@@ -58,7 +58,7 @@ function detailOpen(title,desc,boundary,trigger,source,examples){
    const u=element("ul");
    examples.forEach(item=>u.append(element("li","",item)));
    container.append(u);
-   $("detail-boundary").before(container);
+   $$("detail-boundary").before(container);
  }
  detail.showModal();
 }
@@ -202,12 +202,12 @@ function openLibrary(type,from){
 function closeLibrary(){
  if(lib?.open){if(detail?.open)detail.close();if(playerDlg?.open)playerDlg.close();lib.close()}
  current=null;
- if(["#videos","#signs","#layouts"].includes(location.hash))history.replaceState(null,"",location.pathname+location.search+"#work");
+ if(["#videos","#signs","#layouts"].includes(location.hash))history.replaceState(null,"",location.pathname+location.search+"#collections");
 }
 exit?.addEventListener("click",closeLibrary);
 back?.addEventListener("click",closeLibrary);
 lib?.addEventListener("click",e=>{if(e.target===lib)closeLibrary()});
-lib?.addEventListener("close",()=>{const previous=current;const target=returnFocus;current=null;if(previous&&location.hash==="#"+previous)history.replaceState(null,"",location.pathname+location.search+"#work");if(target?.isConnected)target.focus()});
+lib?.addEventListener("close",()=>{const previous=current;const target=returnFocus;current=null;if(previous&&location.hash==="#"+previous)history.replaceState(null,"",location.pathname+location.search+"#collections");if(target?.isConnected)target.focus()});
 document.querySelectorAll("[data-open]").forEach(button=>button.addEventListener("click",()=>{
  const type=button.getAttribute("data-open");
  history.pushState(null,"",location.pathname+location.search+"#"+type);
