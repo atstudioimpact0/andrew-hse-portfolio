@@ -41,6 +41,9 @@ for(const k of ["index.html","ar.html"]){
  for(const target of targets)assert.ok(ids.includes(target),"Broken anchor "+target+" in "+k);
  assert.ok(text.indexOf('id="collections"')<text.indexOf('id="experience"'));
  assert.ok(text.includes("andrew-portrait.webp"));
+ assert.ok(text.includes('id="career"'),"Career timeline missing");
+ assert.ok(text.includes('class="timeline-item"'),"CV role records missing");
+ assert.ok(!/Safety,|made human\.|الشغل اللي|السلامة تبدأ|A record of my work/.test(text),"Old marketing-heavy headings remain");
  assert.ok(!text.includes("data-open=\"archive\""));
 }
 const v11=read("v11.js");
@@ -54,10 +57,10 @@ for(const name of ["traffic-layout","evacuation-layout","medical-route","lifting
  assert.ok(svg.includes("CONCEPTUAL PREVIEW")&&svg.includes("NOT A SITE DRAWING"),"Disclosure missing: "+name);
 }
 const style=read("v14.css");
-for(const selector of [".hero-main",".preview-strip",".door-title",".scope-groups",".library-dialog",".library-thumb",".work-line",".about-grid",".contact"]){
+for(const selector of [".hero-main",".preview-strip",".door-title",".scope-groups",".library-dialog",".library-thumb",".work-line",".career-section",".contact"]){
  assert.ok(style.includes(selector),"Missing key V14 selector "+selector);
 }
-assert.ok(style.includes("max-width:630px"),"Mobile breakpoint missing");
+assert.ok(style.includes("max-width:720px"),"Mobile breakpoint missing");
 assert.ok(style.includes("prefers-reduced-motion"),"Reduced motion missing");
 const published=films.filter(f=>fs.existsSync(path.join(process.cwd(),f.src)));
 const unpublished=films.filter(f=>!fs.existsSync(path.join(process.cwd(),f.src)));
