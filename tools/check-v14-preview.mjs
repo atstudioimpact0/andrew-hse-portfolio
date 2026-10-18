@@ -43,6 +43,9 @@ for(const k of ["index.html","ar.html"]){
  assert.ok(text.includes("andrew-portrait.webp"));
  assert.ok(text.includes('id="career"'),"Career timeline missing");
  assert.ok(text.includes('class="timeline-item"'),"CV role records missing");
+ assert.ok(!text.includes('class="preview-strip"'),"Production page still includes the preview strip");
+ assert.ok(!text.includes("معاينة التصميم")&&!text.includes("DESIGN PREVIEW"),"Stale preview banner visible");
+ assert.ok(!text.includes("Live site ↗")&&!text.includes("الموقع الحالي ↗"),"Stale return-to-live link visible");
  assert.ok(!/Safety,|made human\.|الشغل اللي|السلامة تبدأ|A record of my work/.test(text),"Old marketing-heavy headings remain");
  assert.ok(!text.includes("data-open=\"archive\""));
 }
@@ -57,7 +60,7 @@ for(const name of ["traffic-layout","evacuation-layout","medical-route","lifting
  assert.ok(svg.includes("CONCEPTUAL PREVIEW")&&svg.includes("NOT A SITE DRAWING"),"Disclosure missing: "+name);
 }
 const style=read("v14.css");
-for(const selector of [".hero-main",".preview-strip",".door-title",".scope-groups",".library-dialog",".library-thumb",".work-line",".career-section",".contact"]){
+for(const selector of [".hero-main",".site-header",".door-title",".scope-groups",".library-dialog",".library-thumb",".work-line",".career-section",".contact"]){
  assert.ok(style.includes(selector),"Missing key V14 selector "+selector);
 }
 assert.ok(style.includes("max-width:720px"),"Mobile breakpoint missing");

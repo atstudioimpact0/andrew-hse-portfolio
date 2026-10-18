@@ -11,8 +11,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .skip:focus{top:9px}
 .eyebrow{font-size:12px;font-weight:700;letter-spacing:.07em;color:var(--accent)}
 html[lang=ar] .eyebrow{letter-spacing:0;font-size:14px}
-.preview-strip{background:#e4e6dc;color:#334239;padding:6px 44px;display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:35px;font-size:12px;font-weight:650}
-.preview-strip a{text-decoration:underline;text-underline-offset:3px}
+
+
 .site-header{background:rgba(243,241,235,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
 .nav-shell{height:80px;display:flex;gap:34px;align-items:center}
 .identity{display:flex;flex-direction:column;align-items:flex-start;line-height:1.25;flex-shrink:0}
@@ -150,7 +150,7 @@ html[lang=ar] .library-intro h2{letter-spacing:0;line-height:1.5}
 }
 @media(max-width:720px){
  .wrap,.library-inner{width:calc(100% - 42px)}
- .preview-strip{padding-inline:20px}
+
  .nav-shell{height:73px;gap:16px}
  .site-nav{gap:13px}
  .site-nav a{font-size:12px}

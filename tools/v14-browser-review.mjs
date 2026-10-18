@@ -22,6 +22,8 @@ try{
   assert.equal(response?.status(),200,c.name+" HTML load");
   await page.waitForFunction(()=>document.querySelectorAll(".work-line").length===16,{timeout:10000});
   assert.equal(await page.locator(".door").count(),3,c.name+" doorway count");
+  assert.equal(await page.locator(".preview-strip").count(),0,c.name+" preview strip should never appear on the published design");
+  assert.ok(!(await page.title()).includes("Preview")&&!(await page.title()).includes("معاينة"),c.name+" title must be official");
   assert.equal(await page.locator(".timeline-item").count(),2,c.name+" two grounded CV positions");
   assert.equal(await page.locator(".education").count(),1,c.name+" education entry");
   assert.equal(await page.locator(".hero-role").count(),1,c.name+" clear job title");
