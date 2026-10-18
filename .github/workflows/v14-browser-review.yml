@@ -10,6 +10,8 @@ on:
       - "v12-work.js"
       - "tools/v14-browser-review.mjs"
       - ".github/workflows/v14-browser-review.yml"
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
