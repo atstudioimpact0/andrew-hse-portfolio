@@ -1,3 +1,27 @@
+# Current release — V11 (18 October 2026)
+
+The bilingual personal portfolio at **https://andrew.atstudioimpact.com** uses a much quieter entry page. A visitor sees only three collection buttons — **Films & Video, Safety Signs, Layouts & Drawings** — and opens each library on demand. The original 16 professional case studies, 25 source sample records and 6 video registrations are preserved in the repository. Neither AT Studio production site nor ATS branding is used.
+
+## Actual media availability
+
+**The public GitHub repository still has zero files in `assets/` as of the V11 release.** Video titles and image paths recorded in metadata are *not* uploaded MP4s or WebP images. The UI intentionally waits for an actual media load/HEAD success and never displays broken thumbnails as if they were published. Sensitive original operational layouts, emergency routes, medical contact data and lifting details must stay private.
+
+To complete the missing binary upload from the owner's Windows device:
+
+1. Download the **Andrew_HSE_V9_ReadyToPublish.zip** package from the earlier ChatGPT delivery to **Downloads**. Put the four later approved source MP4 files in Downloads too (the script recognizes Arabic-Indic date digits in filenames).
+2. Install **Git for Windows** and **FFmpeg/FFprobe** if absent, using free tools; authenticate GitHub write access.
+3. Download **[tools/Publish-All-Approved-Media.ps1](tools/Publish-All-Approved-Media.ps1)** to Downloads, then run in Windows PowerShell:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Publish-All-Approved-Media.ps1"
+```
+
+The script checks file signatures, converts new videos to mobile-friendly MP4 with a WebP cover, stages only allowlisted media files and asks for explicit public-release clearance before pushing to the dedicated repository. It does **not** upload confidential layout originals and never uses a force push. If some source files aren't in Downloads, those are skipped and must be uploaded later.
+
+After the push, the **V11 Portfolio QA** workflow reports missing media; the live site must be checked on desktop and mobile before saying that playback is complete.
+
+---
+
 # Andrew Tharwat — Independent HSE Portfolio
 
 Standalone professional portfolio (Arabic / English) for **Andrew Tharwat Boshra Thabet**, HSE Supervisor.
