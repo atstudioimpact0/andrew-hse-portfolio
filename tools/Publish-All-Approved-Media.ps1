@@ -276,8 +276,7 @@ try {
       exit 0
     }
     & git diff --cached --stat
-    # Git needs an author and committer. Only set identity in this temporary
-    # checkout; never change the user's global Git configuration.
+    # Set author metadata only in this disposable clone, not in other repositories.
     $commitName = (& git config --get user.name)
     if([string]::IsNullOrWhiteSpace([string]$commitName)) {
       $commitName = Read-Host 'Git commit name (e.g. Andrew Tharwat)'
@@ -289,24 +288,9 @@ try {
     }
     $commitEmail = (& git config --get user.email)
     if([string]::IsNullOrWhiteSpace([string]$commitEmail)) {
-      Write-Host 'Use your GitHub verified email or GitHub no-reply email. This email may be visible in public commit history.' -ForegroundColor Yellow
+      Write-Host 'Use a GitHub verified email or GitHub no-reply email. This may appear in public commit history.' -ForegroundColor Yellow
       $commitEmail = Read-Host 'Git commit email'
-      if($commitEmail -notmatch '^[^\s@]+@[^\s@]+\.[^\s@]+
-    if($LASTEXITCODE -ne 0) {
-      throw 'Git commit failed. Configure your Git username and email.'
-    }
-    & git push origin main
-    if($LASTEXITCODE -ne 0) {
-      throw 'Git push failed. No force push was attempted.'
-    }
-    Write-Host 'UPLOAD COMPLETE: media committed to Andrew independent GitHub repository.' -ForegroundColor Green
-  } finally {
-    Pop-Location
-  }
-} finally {
-  Remove-Item -LiteralPath $tmp -Recurse -Force -ErrorAction SilentlyContinue
-}
-) {
+      if([string]::IsNullOrWhiteSpace($commitEmail) -or $commitEmail -notlike '*@*.*') {
         throw 'A valid Git commit email is required.'
       }
       & git config --local user.email $commitEmail
