@@ -276,6 +276,26 @@ try {
       exit 0
     }
     & git diff --cached --stat
+    # Set author metadata only in this disposable clone, not in other repositories.
+    $commitName = (& git config --get user.name)
+    if([string]::IsNullOrWhiteSpace([string]$commitName)) {
+      $commitName = Read-Host 'Git commit name (e.g. Andrew Tharwat)'
+      if([string]::IsNullOrWhiteSpace($commitName)) {
+        throw 'Git commit author name cannot be empty.'
+      }
+      & git config --local user.name $commitName
+      if($LASTEXITCODE -ne 0) { throw 'Could not save local Git author name.' }
+    }
+    $commitEmail = (& git config --get user.email)
+    if([string]::IsNullOrWhiteSpace([string]$commitEmail)) {
+      Write-Host 'Use a GitHub verified email or GitHub no-reply email. This may appear in public commit history.' -ForegroundColor Yellow
+      $commitEmail = Read-Host 'Git commit email'
+      if([string]::IsNullOrWhiteSpace($commitEmail) -or $commitEmail -notlike '*@*.*') {
+        throw 'A valid Git commit email is required.'
+      }
+      & git config --local user.email $commitEmail
+      if($LASTEXITCODE -ne 0) { throw 'Could not save local Git email.' }
+    }
     & git commit -m 'media: publish authorized Andrew HSE portfolio assets'
     if($LASTEXITCODE -ne 0) {
       throw 'Git commit failed. Configure your Git username and email.'
