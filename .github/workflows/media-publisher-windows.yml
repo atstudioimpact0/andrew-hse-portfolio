@@ -1,0 +1,33 @@
+name: Media publisher Windows PowerShell QA
+on:
+  push:
+    branches: ["fix/andrew-publisher-ps-parser-20261018", main]
+    paths:
+      - "tools/Publish-All-Approved-Media.ps1"
+      - ".github/workflows/media-publisher-windows.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "tools/Publish-All-Approved-Media.ps1"
+      - ".github/workflows/media-publisher-windows.yml"
+permissions:
+  contents: read
+jobs:
+  powershell-parser:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse with Windows PowerShell 5.1 (without executing upload)
+        shell: powershell
+        run: |
+          $file = Join-Path (Get-Location) 'tools/Publish-All-Approved-Media.ps1'
+          $tokens = $null
+          $errors = $null
+          [void][System.Management.Automation.Language.Parser]::ParseFile($file, [ref]$tokens, [ref]$errors)
+          if ($errors.Count -gt 0) {
+            foreach ($item in $errors) { Write-Host ($item.Message + ' at ' + $item.Extent.StartLineNumber) -ForegroundColor Red }
+            exit 1
+          }
+          $astText = Get-Content -LiteralPath $file -Raw
+          if ($astText -notmatch 'Select-LocalFiles' -or $astText -notmatch 'PUBLISH' -or $astText -notmatch 'git push origin main') { exit 1 }
+          Write-Host 'PASS: Windows PowerShell 5.1 parsed the complete media publisher without errors.'
