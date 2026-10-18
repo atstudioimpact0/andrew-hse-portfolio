@@ -1,0 +1,21 @@
+name: V11 Portfolio QA
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: JS syntax
+        run: |
+          node --check v11.js
+          node --check data.js
+      - name: Validate HTML and audit media availability
+        run: node tools/audit_v11_media.mjs
