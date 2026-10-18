@@ -59,7 +59,7 @@ detail?.addEventListener("click",e=>{if(e.target===detail)detail.close()});
 function appendAvailablePicture(card,src,title){
  if(!safeImage.test(src))return Promise.resolve(false);
  return new Promise(resolve=>{
-   const image=new Image();image.loading="lazy";image.decoding="async";image.alt=title;
+   const image=new Image();image.decoding="async";image.alt=title;
    image.onload=()=>{
      if(!image.naturalWidth){resolve(false);return}
      const frame=makeThumb("",title);frame.replaceChildren(image);
