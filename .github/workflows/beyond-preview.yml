@@ -1,0 +1,32 @@
+name: Beyond HSE Preview QA
+on:
+  push:
+    branches: ["preview/andrew-beyond-hse-v1"]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check content, links and source preservation
+        run: |
+          node --check tools/check-beyond.mjs
+          node tools/check-beyond.mjs
+      - name: Browser inspect AR/EN desktop/mobile and portal navigation
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/beyond-http.log 2>&1 &
+          sleep 2
+          node tools/beyond-browser.mjs
+      - name: Save visual review images
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: andrew-beyond-hse-preview-screens
+          path: beyond-review/
+          if-no-files-found: warn
+          retention-days: 14

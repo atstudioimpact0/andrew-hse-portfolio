@@ -204,3 +204,11 @@ html[lang=ar] .library-intro h2{letter-spacing:0;line-height:1.5}
  html{scroll-behavior:auto}
  *,:before,:after{transition:none!important;animation:none!important}
 }
+
+
+/* Isolated portal entry to the creative/technology page. */
+.beyond-entry{display:inline-flex;align-items:center;gap:13px;margin-top:29px;color:#28614c;font-size:14px;font-weight:700;border:1px solid #8db19a;padding:10px 16px;max-width:max-content;text-decoration:none}
+.beyond-entry span:first-child{color:#7f9470;font-size:20px;line-height:1}
+.beyond-entry span:last-child{margin-inline-start:7px;color:#766548}
+.beyond-entry:hover{background:#e2efe1;border-color:#537965}
+@media(max-width:720px){.beyond-entry{margin-top:20px;font-size:14px}}
