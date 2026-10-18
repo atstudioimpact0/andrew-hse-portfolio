@@ -45,12 +45,12 @@ function makeThumb(symbol,alt){
 }
 function detailOpen(title,desc,boundary,trigger,source,examples){
  lastDetail=trigger;
- $("detail-title").textContent=title;$("detail-description").textContent=desc||"";$("detail-boundary").textContent=boundary||"";
- const oldImg=$("detail-image");if(oldImg)oldImg.remove();
- const oldList=$("detail-examples");if(oldList)oldList.remove();
+ $$("detail-title").textContent=title;$$("detail-description").textContent=desc||"";$$("detail-boundary").textContent=boundary||"";
+ const oldImg=$$("detail-image");if(oldImg)oldImg.remove();
+ const oldList=$$("detail-examples");if(oldList)oldList.remove();
  if(source&&safeImage.test(source)){
    const img=element("img","detail-image");img.id="detail-image";img.src=source;img.alt=title;
-   $("detail-description").before(img);
+   $$("detail-description").before(img);
  }
  if(Array.isArray(examples)&&examples.length){
    const container=element("section","detail-examples");container.id="detail-examples";
@@ -58,7 +58,7 @@ function detailOpen(title,desc,boundary,trigger,source,examples){
    const u=element("ul");
    examples.forEach(item=>u.append(element("li","",item)));
    container.append(u);
-   $("detail-boundary").before(container);
+   $$("detail-boundary").before(container);
  }
  detail.showModal();
 }
