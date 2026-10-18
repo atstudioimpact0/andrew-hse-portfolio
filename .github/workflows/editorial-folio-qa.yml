@@ -1,0 +1,33 @@
+name: Andrew Editorial Volume 02 QA
+on:
+  push:
+    branches: ["preview/andrew-editorial-portfolio-v2"]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  editorial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source preservation and bilingual design
+        run: |
+          node --check tools/check-editorial.mjs
+          node tools/check-editorial.mjs
+      - name: Test desktop/mobile with real Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/andrew-folio-http.log 2>&1 &
+          sleep 2
+          node tools/check-editorial-browser.mjs
+      - name: Save four review screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: andrew-editorial-folio-v2-screenshots
+          path: editorial-review/
+          if-no-files-found: warn
+          retention-days: 14
