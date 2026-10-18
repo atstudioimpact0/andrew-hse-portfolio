@@ -19,7 +19,7 @@ html[lang=ar] .mono{font-family:var(--ar);font-size:12px;letter-spacing:0}
 .nav-actions{display:flex;align-items:center;gap:18px;margin-inline-start:13px}
 .nav-actions a{font-size:13px;white-space:nowrap}.b-switch{border-inline-start:1px solid var(--line);padding-inline-start:16px;color:var(--mint)}
 .back-cv{border:1px solid rgba(197,236,183,.35);padding:10px 13px}
-.b-hero{min-height:670px;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(300px,.85fr);gap:50px;align-items:center;position:relative;padding-top:72px;padding-bottom:104px}
+.b-hero{min-height:670px;overflow:clip;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(300px,.85fr);gap:50px;align-items:center;position:relative;padding-top:72px;padding-bottom:104px}
 .hero-copy{position:relative;z-index:2;max-width:790px}
 .kicker{color:var(--mint);display:flex;gap:11px;align-items:center;margin:0}
 .point{background:var(--mint);height:6px;width:6px;border-radius:50%;display:inline-block;flex-shrink:0}
@@ -54,7 +54,12 @@ html[lang=ar] .feature h3{letter-spacing:0;line-height:1.55}
 .feature .cta-link span{color:var(--mint)}
 .feature-index{position:absolute;bottom:35px;inset-inline-end:35px;color:#87aaa0;font-size:10px}
 .radio-wave{position:absolute;bottom:65px;inset-inline-end:22px;display:flex;align-items:center;gap:3px;height:60px;opacity:.2}
-.radio-wave span{width:2px;height:calc(8px + (var(--i) * 7px) % 52px);max-height:60px;background:#dcf0e2;border-radius:4px}
+.radio-wave span{width:2px;height:20px;max-height:60px;background:#dcf0e2;border-radius:4px}
+.radio-wave span:nth-child(6n+1){height:12px}
+.radio-wave span:nth-child(6n+2){height:34px}
+.radio-wave span:nth-child(6n+3){height:52px}
+.radio-wave span:nth-child(6n+4){height:41px}
+.radio-wave span:nth-child(6n+5){height:25px}
 .b-products .kicker{color:#9d654b}
 .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .project{padding:28px 25px 25px;min-height:250px;border:1px solid #cbd2c9;display:flex;flex-direction:column;background:#fbfaf6}
